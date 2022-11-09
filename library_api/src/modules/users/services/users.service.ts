@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { hashPassword } from 'src/shared/password/password';
 import { BaseService } from 'src/shared/services/base.service';
 import { Repository } from 'typeorm';
 import { UserDto } from '../dtos/users.dto';
@@ -11,7 +12,6 @@ export class UsersService extends BaseService<Users> {
 
   constructor(
     @InjectRepository(Users) repository: Repository<Users>,
-    // private readonly UsersService: UsersService,
   ) {
     super(repository);
     this.userRepository = repository;
@@ -20,4 +20,22 @@ export class UsersService extends BaseService<Users> {
   async findByEmail(email: string): Promise<Users> {
     return await this.userRepository.findOne({ where: { email: email } })
   }
+
+  async findOne(id: number) {
+    let data = await this.userRepository.findOne({
+      where: {
+        id: id
+      }
+    })
+    return data
+  }
+
+
+  async update(id: number, data: Users) {
+    data.password = await hashPassword(data.password);
+    await this.userRepository.update(id, data);
+    return await this.findOne(id);
+  }
+  
+
 }

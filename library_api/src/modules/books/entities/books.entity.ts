@@ -11,7 +11,7 @@ import { Users } from 'src/modules/users/entities/users.entity';
 
 @Entity('books')
 export class Books extends Base {
-  @Column({ type: 'varchar', nullable: false, unique: true })
+  @Column({ type: 'varchar', nullable: false, unique: true, length: 50 })
   title: string;
 
   @Column({ type: 'varchar', nullable: false, length: 200 })

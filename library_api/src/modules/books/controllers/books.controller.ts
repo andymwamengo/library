@@ -29,6 +29,11 @@ export class BooksController {
     return await this.booksService.find();
   }
 
+  @Get('search/:search')
+  async searchBooks(@Param('search') searchText: string) {
+    return await this.booksService.searchBook(searchText);
+  }
+
   @Get(':id')
   async findOne(@Param('id') id: number) {
     return await this.booksService.findOne(id);
@@ -56,5 +61,20 @@ export class BooksController {
   @UseGuards(JWTAuthGuard)
   async removeMany(@ReqUser() user, @Param('id') id: number[]) {
     return await this.booksService.deleteManyBooks(user.id, id);
+  }
+
+  @Get('author/:id')
+  async findBookByAuthor(@Param('id') id: number) {
+    return await this.booksService.getBookByAuthor(id);
+  }
+
+  @Get('author')
+  async findTotalCurrentUserBook(@ReqUser() user) {
+    return await this.booksService.getTotalBookAuthor(user.id);
+  }
+
+  @Get('page/data')
+  async bookProfile(@ReqUser() user) {
+    return await this.booksService.getBookByAuthorPrivate(user.id);
   }
 }

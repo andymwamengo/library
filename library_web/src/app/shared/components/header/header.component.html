@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand-lg" style="box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;">
+  <div class="container-xxl container-xl d-flex flex-wrap">
+    <div class="d-flex flex-fill justify-content-start">
+      <div class="px-2 d-flex align-items-start">
+        <a class="navbar-brand" [routerLink]="['/']"> Library</a>
+      </div>
+      <div class="px-2 justify-content-start align-items-start">
+        <div class="container">
+          <div class="form">
+            <input type="text" class="form-control form-input" (keyup)="searchBooks($event)"
+              placeholder="Search books...">
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-start">
+        <li class="ps-3 nav-item d-flex align-items-center">
+          <a class="nav-link" [routerLink]="['/books']"> Home </a>
+        </li>
+        <li class="nav-item px-3 d-flex align-items-center">
+          <a class="nav-link" [routerLink]="['/books']"> Books </a>
+        </li>
+        <li class="nav-item d-flex align-items-center">
+          <a class="nav-link" [routerLink]="['/users']"> Users </a>
+        </li>
+      </div>
+    </div>
+    <div class="d-flex flex flex-wrap flex-wrap justify-content-end">
+      <div *ngIf="!(currentUser$ | async)" class="px-3 d-flex align-items-center">
+        <a class="btn btn-outline-secondary" [routerLink]="['/auth/login']">Sign In</a>
+      </div>
+      <div *ngIf="!(currentUser$ | async)" class="px-3 d-flex align-items-center">
+        <a class="btn btn-outline-primary" [routerLink]="['/auth/register']">Create Account</a>
+      </div>
+      <div *ngIf="(currentUser$ | async)" class="px-3 d-flex align-items-center">
+        <a class="btn btn-outline-primary" [routerLink]="['/books/create']">Create Book</a>
+      </div>
+      <div class="px-2" *ngIf="(currentUser$ | async) as user">
+        <div class="nav-link" [matMenuTriggerFor]="accountMenu" aria-label="My Account">
+          <div class="circle">{{ user.username | slice: 0:2 | uppercase}}</div>
+        </div>
+        <mat-menu #accountMenu="matMenu" xPosition="before">
+          <div class="px-3">
+            <a [routerLink]="['/users/profile']" class="nav-link justify-content-center align-item-center"
+              aria-label="My Account">
+              <div class="circle  d-flex justify-content-center align-item-center">{{ user.username | slice: 0:2 |
+                uppercase}}</div>
+              <div class="">{{ user.username }}</div>
+              <div class="fw-light">{{ user.email }}</div>
+            </a>
+            <button mat-menu-item>
+              <div class="">Manage Your Account</div>
+            </button>
+            <button mat-menu-item class="d-flex align-item-center">
+              <a class="text-decoration-none" [routerLink]="['/auth/register', user.id]">Edit Account</a>
+            </button>
+            <button mat-menu-item (click)="logout()">Logout</button>
+          </div>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container-xxl container-xl" *ngIf="(books$| async) as books">
+  <a class="text-decoration-none" [routerLink]="['/books/details/', book.id]" *ngFor="let book of books">
+    <div class="py-3">
+      <h1 class="text-primary">{{ book.title }}</h1>
+    <div class="text-dark">{{ book.description }}</div>
+    </div>
+  </a>
+</div>

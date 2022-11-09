@@ -1,0 +1,23 @@
+<mat-card>
+  <div class="container p-2" *ngIf="bookForm">
+    <h3>Create Book</h3>
+    <form [formGroup]="bookForm" (ngSubmit)="submitForm()" novalidate>
+      <div class="form-group mb-3">
+        <mat-label>Title</mat-label>
+        <input mat-input type="text" formControlName="title" class="form-control" maxlength="50">
+      </div>
+      <div class="form-group mb-3">
+        <mat-label>Description</mat-label>
+        <textarea mat-input class="form-control" formControlName="description" rows="3" maxlength="200"></textarea>
+      </div>
+
+      <div class="form-group mb-3">
+        <mat-slide-toggle formControlName="public">Public</mat-slide-toggle>
+      </div>
+
+      <div class="py-3">
+        <button class="btn btn-primary" type="submit" [disabled]="bookForm.invalid">Submit</button>
+      </div>
+    </form>
+  </div>
+</mat-card>

@@ -1,0 +1,13 @@
+<div class="" *ngIf="(user$ | async) as user">
+  <div class="">
+    <h4><small>Username</small>: {{ user.username }}</h4>
+    <h4><small>Email</small>: {{ user.email }}</h4>
+    <h4><small>Joined</small>: {{ user.createdAt | date }}</h4>
+  </div>
+  <div class="py-2" *ngIf="(books$ | async) as books">
+    <div class="py-3"><h3>{{ books?.length }} <span class="px-2">Books</span></h3></div>
+    <div class="py-2">
+      <app-book *ngFor="let book of books" [book]="book"></app-book>
+    </div>
+  </div>
+</div>

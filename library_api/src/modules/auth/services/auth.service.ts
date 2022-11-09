@@ -41,7 +41,6 @@ export class AuthService {
   }
 
   public getUserById(id: number): Promise<UserDto> {
-    console.log("🚀 ~ file: auth.service.ts ~ line 44 ~ AuthService ~ getUserById ~ id", id)
     return this.userService.findOne(id)
   }
 

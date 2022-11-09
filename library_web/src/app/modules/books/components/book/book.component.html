@@ -1,0 +1,33 @@
+<div class="">
+  <ng-container *ngIf="book.author?.id === (currentUser$ | async)?.id">
+    <div class="d-flex justify-content-end">
+      <div class="d-flex justify-content-end">
+        <div class="p-2">
+          <button class="btn btn-outline-danger" (click)="deleteBook(book)">Delete</button>
+        </div>
+        <div class="p-2">
+          <a class="btn btn-outline-primary" [routerLink]="['/books/create/', book.id]">Edit</a>
+        </div>
+        <div class="p-2">
+          <div class="btn btn-outline-secondary">Status: {{ book.public }}</div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <a class="text-decoration-none text-dark" [routerLink]="['/books/details/', book.id]">
+    <h1 class="text-primary">
+      {{ book.title }}
+    </h1>
+    <div class="py-2">
+      {{ book.description }}
+    </div>
+  </a>
+  <div class="py-2">
+    <a [routerLink]="['/users/details/', book.author?.id]" class="d-flex text-decoration-none text-dark">
+      <div class="circle">{{ book.author?.username | slice: 0:2 | uppercase }}</div>
+      <div class="p-3">Username: <span>{{ book.author?.username }}</span></div>
+      <div class="p-3">Email: <span>{{ book.author?.email }}</span></div>
+      <div class="p-3">Total Books: <span>{{ totalBooks }}</span></div>
+    </a>
+  </div>
+</div>

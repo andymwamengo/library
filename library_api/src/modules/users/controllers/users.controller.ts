@@ -1,9 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { JWTAuthGuard } from 'src/modules/auth/guards/jwt-auth.guard';
 import { ReqUser } from 'src/modules/auth/interface/request.user';
-import { UserRoles } from 'src/shared/decorators/roles.decorator';
-import { UserRole } from 'src/shared/enums/roles.enums';
 import { Users } from '../entities/users.entity';
 import { UsersService } from '../services/users.service';
 
@@ -13,19 +11,19 @@ export class UsersController {
 
   constructor(private readonly usersService: UsersService) { }
 
-  @Post('')  
-  @UseGuards(JWTAuthGuard)
-  @UserRoles(UserRole.ADMIN)
-  async create(@Body() createUserDto: Users) {
-    return await this.usersService.create(createUserDto);
-  }
+  // @Post('')  
+  // @UseGuards(JWTAuthGuard)
+  // @UserRoles(UserRole.ADMIN)
+  // async create(@Body() createUserDto: Users) {
+  //   return await this.usersService.create(createUserDto);
+  // }
 
-  @Post('many')
-  @UseGuards(JWTAuthGuard)
-  @UserRoles(UserRole.ADMIN)
-  async createMany(@Body() createUserDto: Users[]) {
-    return await this.usersService.createMany(createUserDto);
-  }
+  // @Post('many')
+  // @UseGuards(JWTAuthGuard)
+  // @UserRoles(UserRole.ADMIN)
+  // async createMany(@Body() createUserDto: Users[]) {
+  //   return await this.usersService.createMany(createUserDto);
+  // }
 
   @Get('')
   async findAll() {
