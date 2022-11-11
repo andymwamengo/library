@@ -14,6 +14,6 @@ async function bootstrap() {
 
   SwaggerDoc(app);
 
-  await app.listen(4500);
+  await app.listen(4500); // Load port from environment variable
 }
 bootstrap();

@@ -37,5 +37,12 @@ export class UsersService extends BaseService<Users> {
     return await this.findOne(id);
   }
   
+  async find() {
+    let data = await this.userRepository.find({
+      relations: ['books']
+    })
+    return data
+  }
+
 
 }

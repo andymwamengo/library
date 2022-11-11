@@ -14,13 +14,13 @@ export class BooksController {
 
   @Post('')
   @UseGuards(JWTAuthGuard)
-  async create(@ReqUser() user, @Body() createBookDto: BooksDto) {
+  async create(@Body() createBookDto: BooksDto, @ReqUser() user, ) {
     return await this.booksService.createOneBook(user.id, createBookDto);
   }
 
   @Post('many')
   @UseGuards(JWTAuthGuard)
-  async createMany(@ReqUser() user, @Body() createBookDto: BooksDto[]) {
+  async createMany(@Body() createBookDto: BooksDto[], @ReqUser() user, ) {
     return await this.booksService.createManyBooks(user.id, createBookDto);
   }
 

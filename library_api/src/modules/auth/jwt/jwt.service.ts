@@ -4,12 +4,10 @@ import { ExecutionContext, HttpException, HttpStatus, Injectable } from '@nestjs
 import { UserDto } from 'src/modules/users/dtos/users.dto';
 import { LoginResponseDto } from '../dtos/login-response.dto';
 import { TokenType } from 'src/shared/enums/token-type.enum';
-import { DataSource } from 'typeorm/data-source';
 
 @Injectable()
 export class JWTService {
-
-  dataSource: DataSource;
+  // Load these from .env variable
   expireAt = '2d';
   secretKey = 'WSFSGHER#%HEDHNEDBN';
 

@@ -1,3 +1,6 @@
 <div class="container-fluid">
+  <div class="py-3">
+    <h4>{{ (books$ | async)?.length }} Total Books</h4>
+  </div>
   <app-book *ngFor="let book of books$ | async" [totalBooks]="(totalBooks | async)!" [book]="book"></app-book>
 </div>

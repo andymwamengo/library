@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Users } from 'src/app/modules/models/user.model';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-users-page',
@@ -6,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./users-page.component.scss']
 })
 export class UsersPageComponent implements OnInit {
+  users$!: Observable<Users[]>;
 
-  constructor() { }
+  constructor(private usersService: UserService) { }
 
   ngOnInit(): void {
+    this.users$ = this.usersService.getAll();
   }
 
 }

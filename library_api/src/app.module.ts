@@ -13,6 +13,7 @@ import { UsersModule } from './modules/users/users.module';
       isGlobal: true,
       cache: true,
     }),
+    // Load these from .env variable
     TypeOrmModule.forRoot({
       type: "postgres",
       host: "localhost",
@@ -21,7 +22,7 @@ import { UsersModule } from './modules/users/users.module';
       username: 'mwamengo',
       password: '2020',
       autoLoadEntities: true,
-      synchronize: true,
+      synchronize: true, // turn off in production mode
       entities: ['dist/**/*.entity{.ts,.js}'],
       logging: true,
     }),
